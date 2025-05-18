@@ -1,0 +1,346 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f8; 
+  color: #1e293b;
+}
+
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+nav {
+  height: 64px;
+  background-color: #1e3a8a;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  user-select: none;
+  z-index: 10;
+}
+
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  margin: 1rem 2rem 2rem 2rem;
+}
+
+
+.sidebar {
+  width: 280px;
+  background-color: transparent;
+  border-right: 1px solid #d1d5db;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  font-size: 1rem;
+  color: #334155;
+}
+
+.sidebar h3 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.sidebar h4 {
+  font-size: 1.25rem;
+  color: #334155;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 0.5rem 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #334155;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.sidebar li:hover {
+  background-color: #e2e8f0;
+}
+
+.sidebar li.active {
+  font-weight: 700;
+  color: #3b82f6;
+  background-color: #e0f2fe;
+}
+
+.sidebar a {
+  display: block;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  color: #334155;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar a:hover {
+  background-color: #e2e8f0;
+}
+
+.sidebar a.active {
+  font-weight: 700;
+  color: #3b82f6;
+  background-color: #e0f2fe;
+}
+
+/* Sidebar buttons */
+.sidebar button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar button:hover {
+  background-color: #2563eb;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.5);
+}
+
+/* Focus-visible outlines */
+.sidebar button:focus-visible,
+.search-bar button:focus-visible,
+.sidebar li:focus-visible,
+.sidebar a:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  padding: 2rem 2.5rem;
+  position: relative;
+  overflow-y: auto;
+  font-size: 1rem;
+  color: #1e293b;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background: linear-gradient(135deg, #3b82f6, #60a5fa, #22d3ee, #67e8f9);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Search bar */
+.search-bar {
+  position: absolute;
+  top: 1.5rem;
+  right: 2.5rem;
+  display: flex;
+  gap: 0.75rem;
+  max-width: 400px;
+  width: 100%;
+}
+
+.search-bar input {
+  flex-grow: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #334155;
+  box-shadow: 0 0 6px rgba(51, 65, 85, 0.25);
+}
+
+.search-bar button {
+  padding: 0.5rem 1.25rem;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: white;
+  color: #2563eb;
+}
+
+/* Scrollbar styling */
+.sidebar::-webkit-scrollbar,
+.main-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.main-content::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.main-content::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+    margin: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #d1d5db;
+    border-radius: 8px 8px 0 0;
+    background-color: #ffffff;
+  }
+
+  .main-content {
+    border-radius: 0 0 8px 8px;
+    padding-top: 4rem;
+  }
+
+  .search-bar {
+    position: static;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    width: auto;
+    right: auto;
+    top: auto;
+  }
+
+  .sidebar button {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+
+.favorite-card {
+  background-color: #eff6ff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  text-align: center;
+  font-weight: 600;
+  color: #1e293b;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.favorite-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(59,130,246,0.2);
+}
+
+/* Weather card */
+.weather-card {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  background-color: #e0f2fe;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(59,130,246,0.2);
+}
+
+.weather-card .city-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #2563eb;
+}
+
+.weather-card .weather-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.weather-card .weather-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.weather-card .temp {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.weather-card .description {
+  text-transform: capitalize;
+  color: #334155;
+}
+
+.weather-card .weather-details p {
+  margin: 0.25rem 0;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+/* Responsive favorite cards */
+@media (max-width: 480px) {
+  .favorites-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .weather-card {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+}

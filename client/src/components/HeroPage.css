@@ -1,0 +1,63 @@
+/* Ensure html, body, root all take full height and have no margin */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: none; /* remove any default background */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Hero container fills entire viewport with gradient background */
+.hero-container {
+  height: 100vh;  /* full viewport height */
+  width: 100vw;   /* full viewport width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  padding: 2rem;
+  box-sizing: border-box;
+  margin: 0;  /* prevent any margin */
+}
+
+/* Content wrapper with translucent white */
+.hero-content {
+  max-width: 600px;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 2.5rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.hero-content h1 {
+  margin-bottom: 1rem;
+  font-size: 2.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.hero-content p {
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  color: #e0e7ff;
+}
+
+.hero-button {
+  background-color: #ff6f61;
+  border: none;
+  color: white;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 111, 97, 0.4);
+}
+
+.hero-button:hover {
+  background-color: #e85a4f;
+  box-shadow: 0 6px 20px rgba(232, 90, 79, 0.7);
+}
