@@ -15,6 +15,9 @@ function AppContent() {
   const [selectedCity, setSelectedCity] = useState("");
   const [favoriteCities, setFavoriteCities] = useState([]);
 
+  // Base URL from environment variables
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     if (selectedCity) {
       fetchWeather(selectedCity);
@@ -23,7 +26,7 @@ function AppContent() {
         const { latitude, longitude } = pos.coords;
         try {
           const response = await axios.get(
-            `http://localhost:5000/api/weather/geo?lat=${latitude}&lon=${longitude}`
+            `${BASE_URL}/api/weather?lat=${latitude}&lon=${longitude}`
           );
           setWeatherData(response.data);
         } catch (err) {
@@ -31,12 +34,12 @@ function AppContent() {
         }
       });
     }
-  }, [selectedCity]);
+  }, [selectedCity, BASE_URL]);
 
   const fetchWeather = async (city) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/weather?city=${city}`
+        `${BASE_URL}/api/weather?city=${city}`
       );
       setWeatherData(response.data);
     } catch (err) {
