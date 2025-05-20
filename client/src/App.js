@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
@@ -15,14 +15,33 @@ function AppContent() {
   const [selectedCity, setSelectedCity] = useState("");
   const [favoriteCities, setFavoriteCities] = useState([]);
 
-  // Base URL from environment variables
-  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  // Use the correct environment variable for the backend URL, strip trailing slash if present
+  const BASE_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/+$/, "");
 
+  // Optional: Warn if backend URL is missing
+  if (!BASE_URL) {
+    console.warn("REACT_APP_BACKEND_URL is not set in your environment variables.");
+  }
+
+  // Wrap fetchWeather in useCallback so it's stable across renders
+  const fetchWeather = useCallback(
+    async (city) => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/api/weather?city=${encodeURIComponent(city)}`
+        );
+        setWeatherData(response.data);
+      } catch (err) {
+        console.error("Error fetching weather", err);
+      }
+    },
+    [BASE_URL]
+  );
 
   useEffect(() => {
     if (selectedCity) {
       fetchWeather(selectedCity);
-    } else {
+    } else if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (pos) => {
         const { latitude, longitude } = pos.coords;
         try {
@@ -35,18 +54,7 @@ function AppContent() {
         }
       });
     }
-  }, [selectedCity, BASE_URL]);
-
-  const fetchWeather = async (city) => {
-    try {
-      const response = await axios.get(
-        `${BASE_URL}/api/weather?city=${city}`
-      );
-      setWeatherData(response.data);
-    } catch (err) {
-      console.error("Error fetching weather", err);
-    }
-  };
+  }, [selectedCity, BASE_URL, fetchWeather]);
 
   const handleSearch = () => {
     if (searchCity.trim()) {

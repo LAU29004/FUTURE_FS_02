@@ -1,5 +1,5 @@
 {
-  "name": "weather-dashboard",
+  "name": "FUTURE_FS_02",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://LAU29004.github.io/weather-dashboard",
+  "homepage": "https://lau29004.github.io/FUTURE_FS_02",
   "eslintConfig": {
     "extends": [
       "react-app",

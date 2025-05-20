@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <img src="/images/Navbar.png" alt="Navbar" className="navbar-image" />
+        <img src={`${process.env.PUBLIC_URL}/images/Navbar.png`} alt="Navbar" className="navbar-image" />
       </div>
       <h1 className="navbar-title">Weather Dashboard</h1>
     </nav>
