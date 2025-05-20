@@ -18,6 +18,7 @@ function AppContent() {
   // Base URL from environment variables
   const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
+
   useEffect(() => {
     if (selectedCity) {
       fetchWeather(selectedCity);
