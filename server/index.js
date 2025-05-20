@@ -9,18 +9,20 @@ const PORT = 5000;
 const cors = require("cors");
 app.use(cors());
 
+// Root route for sanity check
+app.get("/", (req, res) => {
+  res.send("Weather Dashboard Server is running!");
+});
+
 // Weather API route
 app.get("/api/weather", async (req, res) => {
   const { city, lat, lon } = req.query;
 
   let url = "";
 
-  // Fetch weather based on city
   if (city) {
     url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.WEATHER_API_KEY}&units=metric`;
-  }
-  // Fetch weather based on latitude and longitude (current location)
-  else if (lat && lon) {
+  } else if (lat && lon) {
     url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.WEATHER_API_KEY}&units=metric`;
   }
 
